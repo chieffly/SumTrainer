@@ -1,7 +1,8 @@
-package ru.chieffly.sumtrainer
+package ru.chieffly.sumtrainer.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ru.chieffly.sumtrainer.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
