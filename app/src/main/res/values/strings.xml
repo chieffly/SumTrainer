@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">SumTrainer</string>
+    <string name="game_title">Состав числа</string>
+    <string name="game_rules">Перед вами будет загаданное число, которое может состоять из суммы двух других. Первое число будет известно. Вам нужно угадать второе число чтобы сумма их совпала с загаданным.\n\nПример: в верхнем круге число 6, в одном из нижних знак вопроса, а в другом число 4. Значит на месте вопросительного знака должно быть 2, потому что 4 + 2 = 6</string>
+    <string name="accept">Понятно</string>
+    <string name="choose_level">Выберите уровень:</string>
+    <string name="level_test">Тестовый</string>
+    <string name="level_easy">Легкий</string>
+    <string name="level_normal">Средний</string>
+    <string name="level_hard">Тяжелый</string>
+    <string name="right_answers">Правильных ответов %s (минимум %s)</string>
+    <string name="question_mark">?</string>
+    <string name="result_score">Счет: %s</string>
+    <string name="result_percent">Процент правильных ответов: %s</string>
+    <string name="require_score">Необходимое количество правильных ответов: %s</string>
+    <string name="require_percent">Необходимый процент правильных ответов: %s</string>
+    <string name="result">Итоги игры</string>
 </resources>
