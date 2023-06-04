@@ -17,9 +17,14 @@ import ru.chieffly.sumtrainer.domain.model.GameResult
 import ru.chieffly.sumtrainer.domain.model.Level
 
 class GameFragment : Fragment() {
+    private lateinit var level: Level
+
+    private val factory: GameViewModelFactory by lazy {
+        GameViewModelFactory(level, requireActivity().application)
+    }
 
     private val viewModel: GameViewModel by lazy {
-        ViewModelProvider(this, AndroidViewModelFactory(requireActivity().application))[GameViewModel::class.java]
+        ViewModelProvider(this, factory)[GameViewModel::class.java]
     }
 
     private val optionList by lazy {
@@ -32,7 +37,6 @@ class GameFragment : Fragment() {
             add(binding.tvOptions6)
         }
     }
-    private lateinit var level: Level
     private var _binding: FragmentGameBinding? = null
     private val binding: FragmentGameBinding
         get() = _binding ?: throw RuntimeException("FragmentGameBinding == null")
@@ -55,7 +59,6 @@ class GameFragment : Fragment() {
 
         setClickListeners()
         observeViewModel()
-        viewModel.startGame(level)
     }
 
     private fun setClickListeners() {
