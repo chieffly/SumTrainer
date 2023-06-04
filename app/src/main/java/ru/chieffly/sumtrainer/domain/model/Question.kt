@@ -6,6 +6,10 @@ package ru.chieffly.sumtrainer.domain.model
 
 data class Question(
     val sum: Int,
-    val visibleNumver: Int,
+    val visibleNumber: Int,
     val option: List<Int>
-)
+) {
+
+    val rightAnswer: Int
+        get() = sum - visibleNumber
+}
