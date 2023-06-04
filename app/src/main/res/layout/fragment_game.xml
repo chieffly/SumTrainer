@@ -56,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_game_left_number"
         app:layout_constraintTop_toBottomOf="@+id/tv_game_sum"
-        tools:text="@string/question_mark" />
+        android:text="@string/question_mark" />
 
     <TextView
         android:id="@+id/tv_game_result"

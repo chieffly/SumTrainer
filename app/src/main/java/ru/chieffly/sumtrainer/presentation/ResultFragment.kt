@@ -8,11 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentManager
-import ru.chieffly.sumtrainer.R
 import ru.chieffly.sumtrainer.databinding.FragmentResultBinding
-import ru.chieffly.sumtrainer.databinding.FragmentWelcomeBinding
 import ru.chieffly.sumtrainer.domain.model.GameResult
-import ru.chieffly.sumtrainer.domain.model.Level
 
 
 class ResultFragment : Fragment() {
@@ -38,12 +35,11 @@ class ResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback (viewLifecycleOwner, object : OnBackPressedCallback(true) {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 retryGame()
             }
         })
-
 
     }
 
@@ -53,10 +49,11 @@ class ResultFragment : Fragment() {
     }
 
     private fun parseArgs() {
-        gameResult = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-            requireArguments().getSerializable(KEY_GAME_RESULTS, GameResult::class.java)!!
-        else
-            requireArguments().getSerializable(KEY_GAME_RESULTS) as GameResult
+        gameResult = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requireArguments().getParcelable(KEY_GAME_RESULT, GameResult::class.java)!!
+        } else {
+            requireArguments().getParcelable(KEY_GAME_RESULT)!!
+        }
     }
 
     private fun retryGame() {
@@ -65,11 +62,11 @@ class ResultFragment : Fragment() {
 
     companion object {
 
-        private const val KEY_GAME_RESULTS = "results"
+        private const val KEY_GAME_RESULT = "game_result"
         fun newInstance(results: GameResult): ResultFragment {
             return ResultFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(KEY_GAME_RESULTS, results)
+                    putParcelable(KEY_GAME_RESULT, results)
                 }
             }
         }
