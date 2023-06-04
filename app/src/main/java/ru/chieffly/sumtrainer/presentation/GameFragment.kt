@@ -11,6 +11,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import ru.chieffly.sumtrainer.R
 import ru.chieffly.sumtrainer.databinding.FragmentGameBinding
 import ru.chieffly.sumtrainer.domain.model.GameResult
@@ -19,8 +21,10 @@ import ru.chieffly.sumtrainer.domain.model.Level
 class GameFragment : Fragment() {
     private lateinit var level: Level
 
+    private val args by navArgs<GameFragmentArgs>()
+
     private val factory: GameViewModelFactory by lazy {
-        GameViewModelFactory(level, requireActivity().application)
+        GameViewModelFactory(args.level, requireActivity().application)
     }
 
     private val viewModel: GameViewModel by lazy {
@@ -43,7 +47,6 @@ class GameFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        parseArgs()
     }
 
     override fun onCreateView(
@@ -124,31 +127,7 @@ class GameFragment : Fragment() {
         _binding = null
     }
 
-    private fun parseArgs() {
-        level = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requireArguments().getSerializable(KEY_LEVEL, Level::class.java)!!
-        } else {
-            requireArguments().getSerializable(KEY_LEVEL) as Level
-        }
-    }
-
     private fun launchGameResultFragment(gameResult: GameResult) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, ResultFragment.newInstance(gameResult))
-            .addToBackStack(null)
-            .commit()
-    }
-
-    companion object {
-        const val NAME = "GameFragment"
-        private const val KEY_LEVEL = "level"
-
-        fun newInstance(level: Level): GameFragment {
-            return GameFragment().apply {
-                arguments = Bundle().apply {
-                    putSerializable(KEY_LEVEL, level)
-                }
-            }
-        }
+        findNavController().navigate(GameFragmentDirections.actionGameFragmentToResultFragment(gameResult))
     }
 }

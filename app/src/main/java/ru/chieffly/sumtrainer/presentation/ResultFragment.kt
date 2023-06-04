@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import ru.chieffly.sumtrainer.R
 import ru.chieffly.sumtrainer.databinding.FragmentResultBinding
 import ru.chieffly.sumtrainer.domain.model.GameResult
@@ -19,12 +21,7 @@ class ResultFragment : Fragment() {
     private val binding: FragmentResultBinding
         get() = _binding ?: throw RuntimeException("FragmentResultBinding == null")
 
-    private lateinit var gameResult: GameResult
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        parseArgs()
-    }
+    private val args by navArgs<ResultFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,23 +41,17 @@ class ResultFragment : Fragment() {
         binding.btnUnderstand.setOnClickListener {
             retryGame()
         }
-
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                retryGame()
-            }
-        })
     }
 
     private fun bindViews() {
         with(binding) {
             tvScore.text = String.format(
                 getString(R.string.result_score),
-                gameResult.countOfRightAnswers.toString()
+                args.gameResult.countOfRightAnswers.toString()
             )
             tvScoreReq.text = String.format(
                 getString(R.string.require_score),
-                gameResult.gameSettings.minCountOfRightAnswers.toString()
+                args.gameResult.gameSettings.minCountOfRightAnswers.toString()
             )
             tvPercent.text = String.format(
                 getString(R.string.result_percent),
@@ -68,17 +59,17 @@ class ResultFragment : Fragment() {
             )
             tvPercentReq.text = String.format(
                 getString(R.string.require_percent),
-                gameResult.gameSettings.minPercentOfRightAnswers.toString()
+                args.gameResult.gameSettings.minPercentOfRightAnswers.toString()
             )
         }
     }
 
     private fun getPercentOfRightAnswers() =
-        with(gameResult) {
+        with(args.gameResult) {
             if (countOfQuestions == 0) {
                 0
             } else {
-                ((gameResult.countOfRightAnswers / gameResult.countOfQuestions.toDouble()) * 100).toInt()
+                ((args.gameResult.countOfRightAnswers / args.gameResult.countOfQuestions.toDouble()) * 100).toInt()
             }
         }
 
@@ -87,27 +78,8 @@ class ResultFragment : Fragment() {
         _binding = null
     }
 
-    private fun parseArgs() {
-        gameResult = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requireArguments().getParcelable(KEY_GAME_RESULT, GameResult::class.java)!!
-        } else {
-            requireArguments().getParcelable(KEY_GAME_RESULT)!!
-        }
-    }
 
     private fun retryGame() {
-        requireActivity().supportFragmentManager.popBackStack(GameFragment.NAME, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-    }
-
-    companion object {
-
-        private const val KEY_GAME_RESULT = "game_result"
-        fun newInstance(results: GameResult): ResultFragment {
-            return ResultFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(KEY_GAME_RESULT, results)
-                }
-            }
-        }
+        findNavController().popBackStack()
     }
 }
