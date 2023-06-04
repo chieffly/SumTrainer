@@ -9,10 +9,10 @@
     <string name="level_normal">Средний</string>
     <string name="level_hard">Тяжелый</string>
     <string name="right_answers">Правильных ответов %s (минимум %s)</string>
-    <string name="question_mark">?</string>
+    <string name="question_mark">\?</string>
     <string name="result_score">Счет: %s</string>
-    <string name="result_percent">Процент правильных ответов: %s</string>
+    <string name="result_percent">Процент правильных ответов: %s\%%</string>
     <string name="require_score">Необходимое количество правильных ответов: %s</string>
-    <string name="require_percent">Необходимый процент правильных ответов: %s</string>
+    <string name="require_percent">Необходимый процент правильных ответов: %s\%%</string>
     <string name="result">Итоги игры</string>
 </resources>
