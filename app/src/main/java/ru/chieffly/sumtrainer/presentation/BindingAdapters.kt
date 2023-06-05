@@ -1,7 +1,11 @@
 package ru.chieffly.sumtrainer.presentation
 
+import android.content.Context
+import android.content.res.ColorStateList
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import ru.chieffly.sumtrainer.R
 import ru.chieffly.sumtrainer.domain.model.GameResult
@@ -71,4 +75,46 @@ private fun getPictureResId(winner: Boolean): Int {
     } else {
         R.drawable.ic_loose
     }
+}
+
+@BindingAdapter("percentOfRightAnswers")
+fun bindingPercentOfRightAnswers(progressBar: ProgressBar, progress: Int) {
+    progressBar.setProgress(progress, true)
+}
+
+@BindingAdapter("numberAsText")
+fun bindingNumberAsText(textView: TextView, number: Int) {
+    textView.text = number.toString()
+}
+
+@BindingAdapter("enoughCount")
+fun bindingEnoughCount(textView: TextView, enough: Boolean) {
+    val color = getColorByState(textView.context, enough)
+    textView.setTextColor(color)
+}
+
+@BindingAdapter("enoughPercent")
+fun bindingEnoughPercent(progressBar: ProgressBar, enough: Boolean) {
+    val color = getColorByState(progressBar.context, enough)
+    progressBar.progressTintList = ColorStateList.valueOf(color)
+}
+
+private fun getColorByState(context: Context, goodState: Boolean): Int {
+    val colorResId = if (goodState) {
+        android.R.color.holo_green_light
+    } else {
+        android.R.color.holo_red_dark
+    }
+    return ContextCompat.getColor(context, colorResId)
+}
+
+@BindingAdapter("onOptionClickListener")
+fun bindingOptionClickListener(textView: TextView, clickListener: OnOptionClickListener) {
+    textView.setOnClickListener {
+        clickListener.onOptionClick(textView.text.toString().toInt())
+    }
+}
+
+interface OnOptionClickListener {
+    fun onOptionClick (int: Int)
 }

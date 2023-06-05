@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="ru.chieffly.sumtrainer.presentation.GameViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -13,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="00:00"
+            android:text="@{viewModel.formattedTime}"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +40,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
+            app:numberAsText="@{viewModel.question.sum}"
             tools:text="1" />
 
         <TextView
@@ -46,6 +54,7 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_game_sum"
+            app:numberAsText="@{viewModel.question.visibleNumber}"
             tools:text="1" />
 
         <TextView
@@ -65,12 +74,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="@string/right_answers"
+            android:text="@{viewModel.progressAnswers}"
             android:textSize="16sp"
+            app:enoughCount="@{viewModel.enoughCountOfRightAnswers}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_game_left_number" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_game_left_number"
+            tools:text="@string/right_answers" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -79,10 +90,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:secondaryProgress="@{viewModel.minPercent}"
+            app:enoughPercent="@{viewModel.enoughPercentOfRightAnswers}"
             app:layout_constraintBottom_toTopOf="@+id/tv_options_2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_game_result" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_game_result"
+            app:percentOfRightAnswers="@{viewModel.percentOfRightAnswers}" />
 
         <TextView
             android:id="@+id/tv_options_1"
@@ -90,6 +104,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_green_light"
+            app:onOptionClickListener="@{(option) -> viewModel.receiveAnswer(option)}"
+            android:text="@{viewModel.question.option.get(0).toString()}"
             app:layout_constraintBottom_toTopOf="@+id/tv_options_4"
             app:layout_constraintEnd_toStartOf="@+id/tv_options_2"
             app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +117,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_purple"
+            android:text="@{viewModel.question.option.get(1).toString()}"
+            app:onOptionClickListener="@{(option)-> viewModel.receiveAnswer(option)}"
             app:layout_constraintBottom_toTopOf="@+id/tv_options_5"
             app:layout_constraintEnd_toStartOf="@+id/tv_options_3"
             app:layout_constraintStart_toEndOf="@+id/tv_options_1"
@@ -112,6 +130,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_orange_dark"
+            android:text="@{viewModel.question.option.get(2).toString()}"
+            app:onOptionClickListener="@{(option)-> viewModel.receiveAnswer(option)}"
             app:layout_constraintBottom_toTopOf="@+id/tv_options_6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_options_2"
@@ -123,6 +143,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_dark"
+            android:text="@{viewModel.question.option.get(3).toString()}"
+            app:onOptionClickListener="@{(option)-> viewModel.receiveAnswer(option)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_options_5"
             app:layout_constraintStart_toStartOf="parent"
@@ -134,6 +156,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_red_light"
+            android:text="@{viewModel.question.option.get(4).toString()}"
+            app:onOptionClickListener="@{(option)-> viewModel.receiveAnswer(option)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_options_6"
             app:layout_constraintStart_toEndOf="@+id/tv_options_4"
@@ -145,6 +169,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_green_dark"
+            android:text="@{viewModel.question.option.get(5).toString()}"
+            app:onOptionClickListener="@{(option)-> viewModel.receiveAnswer(option)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_options_5"
