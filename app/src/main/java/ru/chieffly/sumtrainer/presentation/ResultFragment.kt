@@ -1,18 +1,13 @@
 package ru.chieffly.sumtrainer.presentation
 
-import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import ru.chieffly.sumtrainer.R
 import ru.chieffly.sumtrainer.databinding.FragmentResultBinding
-import ru.chieffly.sumtrainer.domain.model.GameResult
 
 
 class ResultFragment : Fragment() {
@@ -44,34 +39,8 @@ class ResultFragment : Fragment() {
     }
 
     private fun bindViews() {
-        with(binding) {
-            tvScore.text = String.format(
-                getString(R.string.result_score),
-                args.gameResult.countOfRightAnswers.toString()
-            )
-            tvScoreReq.text = String.format(
-                getString(R.string.require_score),
-                args.gameResult.gameSettings.minCountOfRightAnswers.toString()
-            )
-            tvPercent.text = String.format(
-                getString(R.string.result_percent),
-                getPercentOfRightAnswers().toString()
-            )
-            tvPercentReq.text = String.format(
-                getString(R.string.require_percent),
-                args.gameResult.gameSettings.minPercentOfRightAnswers.toString()
-            )
-        }
+        binding.gameResult = args.gameResult
     }
-
-    private fun getPercentOfRightAnswers() =
-        with(args.gameResult) {
-            if (countOfQuestions == 0) {
-                0
-            } else {
-                ((args.gameResult.countOfRightAnswers / args.gameResult.countOfQuestions.toDouble()) * 100).toInt()
-            }
-        }
 
     override fun onDestroyView() {
         super.onDestroyView()

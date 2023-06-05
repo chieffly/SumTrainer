@@ -1,58 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".presentation.ChooseLevelFragment">
+<layout>
 
-    <TextView
-        android:id="@+id/tv_level_title"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16sp"
-        android:textStyle="bold"
-        android:textSize="24sp"
-        android:text="@string/choose_level" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".presentation.ChooseLevelFragment">
 
-    <Button
-        android:id="@+id/btn_level_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="@string/level_test"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        />
+        <TextView
+            android:id="@+id/tv_level_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16sp"
+            android:text="@string/choose_level"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btn_level_easy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:backgroundTint="@android:color/holo_orange_light"
-        android:text="@string/level_easy"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"        />
+        <Button
+            android:id="@+id/btn_level_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/level_test"
+            android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/btn_level_normal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:backgroundTint="@android:color/holo_green_light"
-        android:text="@string/level_normal"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"        />
+        <Button
+            android:id="@+id/btn_level_easy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@android:color/holo_orange_light"
+            android:text="@string/level_easy"
+            android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/btn_level_hard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="@string/level_hard"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@android:color/holo_red_light"
-        />
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_level_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@android:color/holo_green_light"
+            android:text="@string/level_normal"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_level_hard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:text="@string/level_hard"
+            android:textSize="16sp" />
+    </LinearLayout>
+</layout>

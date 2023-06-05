@@ -14,5 +14,7 @@
     <string name="result_percent">Процент правильных ответов: %s\%%</string>
     <string name="require_score">Необходимое количество правильных ответов: %s</string>
     <string name="require_percent">Необходимый процент правильных ответов: %s\%%</string>
-    <string name="result">Итоги игры</string>
+    <string name="result_title">Итоги игры</string>
+    <string name="result_win">Победа!</string>
+    <string name="result_loose">Увы((</string>
 </resources>

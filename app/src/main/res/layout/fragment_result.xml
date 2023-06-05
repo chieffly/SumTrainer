@@ -1,54 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".presentation.ResultFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tv_level_title"
+    <data>
+
+        <variable
+            name="gameResult"
+            type="ru.chieffly.sumtrainer.domain.model.GameResult" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16sp"
-        android:textStyle="bold"
-        android:textSize="24sp"
-        android:text="@string/result" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".presentation.ResultFragment">
 
-    <TextView
-        android:id="@+id/tv_score"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/result_score" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/ic_win"
+            app:resultPicture="@{gameResult.winner}" />
 
-    <TextView
-        android:id="@+id/tv_score_req"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/require_score" />
+        <TextView
+            android:id="@+id/tv_level_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16sp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:result="@{gameResult.winner}"
+            tools:text="@string/result_win" />
 
-    <TextView
-        android:id="@+id/tv_percent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/result_percent" />
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/result_score"
+            app:score="@{gameResult.countOfRightAnswers}" />
 
-    <TextView
-        android:id="@+id/tv_percent_req"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/require_percent" />
+        <TextView
+            android:id="@+id/tv_score_req"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:requiredAnswers="@{gameResult.gameSettings.minCountOfRightAnswers}" />
+
+        <TextView
+            android:id="@+id/tv_percent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/result_percent"
+            app:percent="@{gameResult}" />
+
+        <TextView
+            android:id="@+id/tv_percent_req"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/require_percent"
+            app:requiredPercent="@{gameResult.gameSettings.minPercentOfRightAnswers}" />
 
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/accept"
-        android:id="@+id/btn_understand"/>
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_understand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/accept" />
+    </LinearLayout>
+</layout>

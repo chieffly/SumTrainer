@@ -1,14 +1,12 @@
 package ru.chieffly.sumtrainer.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import ru.chieffly.sumtrainer.R
 import ru.chieffly.sumtrainer.databinding.FragmentChooseLevelBinding
-import ru.chieffly.sumtrainer.databinding.FragmentWelcomeBinding
 import ru.chieffly.sumtrainer.domain.model.Level
 
 class ChooseLevelFragment : Fragment() {
